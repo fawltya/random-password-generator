@@ -90,28 +90,38 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var charLength = 0;
+var passwordArray = []
 // Function to prompt user for password options
 function getPasswordOptions() {
   // Character Length
   var charLength = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
-    if (charLength >= 10 && charLength <= 65) {
-      return charLength;
-    } else alert("Please enter an amount of characters between 10 - 64!");
-      getPasswordOptions();
-  // lowerCaseOption = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
-  // if (lowerCase)
-  // return lowerCaseOption;
-}
+    if (charLength >= 10 && charLength <= 64) {
+      // Lowercase
+      var containLowercase = confirm("Do you want lowercase characters in the password?");
+      // Uppercase
+      var containUppercase = confirm("Do you want uppercase characters in the password?");
+      // Numeric
+      var containNumeric = confirm("Do you want numeric characters in the password?");
+      // Special Char
+      var containSpecial = confirm("Do you want special characters in the password?");
+      passwordArray = [charLength, containLowercase, containUppercase, containNumeric, containSpecial];
+      for (i = 1; i < 5; i++) { // Iterate to check if atleast one of the character types is used.
+        if (passwordArray[i] != true) {
+          alert("Please use a password with atleast one lot of characters"); getPasswordOptions();
+            } else return passwordArray;  
+      } 
+    } else alert("Please enter an amount of characters between 10 - 64!"); getPasswordOptions();
 
+} 
+    
 getPasswordOptions()
-console.log(charLength)
+
+console.log(passwordArray)
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  // var allChar = specialCharacters + upperCasedCharacters + lowerCasedCharacters + numericCharacters;
-  // const randChar = allChar[Math.floor(Math.random() * array.length)];
-  // console.log(randChar);
+  const randChar = allChar[Math.floor(Math.random() * array.length)];
+  console.log(randChar);
 }
 
 getRandom();
