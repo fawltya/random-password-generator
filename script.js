@@ -1,3 +1,5 @@
+// Promt 5 times for each - Length, Lowercase, Uppercase, Numeric, Special characters ($@%&*, etc.)
+
 // Array of special characters to be included in password
 var specialCharacters = [
   '@',
@@ -88,16 +90,28 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+var charLength = 0;
 // Function to prompt user for password options
 function getPasswordOptions() {
-  prompt()
+  // Character Length
+  var charLength = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
+    if (charLength >= 10 && charLength <= 65) {
+      return charLength;
+    } else alert("Please enter an amount of characters between 10 - 64!");
+      getPasswordOptions();
+  // lowerCaseOption = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
+  // if (lowerCase)
+  // return lowerCaseOption;
 }
+
+getPasswordOptions()
+console.log(charLength)
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  var allChar = specialCharacters + upperCasedCharacters + lowerCasedCharacters + numericCharacters;
-  const randChar = allChar[Math.floor(Math.random() * array.length)];
-  console.log(randChar);
+  // var allChar = specialCharacters + upperCasedCharacters + lowerCasedCharacters + numericCharacters;
+  // const randChar = allChar[Math.floor(Math.random() * array.length)];
+  // console.log(randChar);
 }
 
 getRandom();
@@ -105,6 +119,8 @@ getRandom();
 function generatePassword() {
 
 }
+
+
 
 // Dont need to edit below
 
