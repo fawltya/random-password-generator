@@ -89,13 +89,13 @@ var upperCasedCharacters = [
   'Y',
   'Z'
 ];
-
+/*
 var passwordArray = []
 // Function to prompt user for password options
 function getPasswordOptions() {
   // Character Length
-  var charLength = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
-    if (charLength >= 10 && charLength <= 64) {
+  const length = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
+    if (length >= 10 && length <= 64) {
       // Lowercase
       var containLowercase = confirm("Do you want lowercase characters in the password?");
       // Uppercase
@@ -104,7 +104,7 @@ function getPasswordOptions() {
       var containNumeric = confirm("Do you want numeric characters in the password?");
       // Special Char
       var containSpecial = confirm("Do you want special characters in the password?");
-      passwordArray = [charLength, containLowercase, containUppercase, containNumeric, containSpecial];
+      passwordArray = [length, containLowercase, containUppercase, containNumeric, containSpecial];
       for (i = 1; i < 5; i++) { // Iterate to check if atleast one of the character types is used.
         if (passwordArray[i] != true) {
           alert("Please use a password with atleast one lot of characters"); getPasswordOptions();
@@ -113,22 +113,101 @@ function getPasswordOptions() {
     } else alert("Please enter an amount of characters between 10 - 64!"); getPasswordOptions();
 
 } 
-    
-getPasswordOptions()
+*/
 
-console.log(passwordArray)
+function getPasswordOptions() {
+  length = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
+  while ( length < 10 || length > 64) {
+    length = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
+  };
+  // Lowercase
+  isLowercaseIncluded = confirm("Do you want lowercase characters in the password?");
+  // Uppercase
+  isUppercaseIncluded = confirm("Do you want uppercase characters in the password?");
+  // Numeric
+  isNumberIncluded = confirm("Do you want numeric characters in the password?");
+  // Special Char
+  isSpecialCharsIncluded = confirm("Do you want special characters in the password?");
+  // Prompt user about length of the password
+  // while the user input is not a number or < 10 or > 64, we prompt them again about the length of the password
+
+  // use confirm to ask user if they want Lowercase
+  // use confirm to ask user if they want Uppercase
+  // use confirm to ask user if they want Numeric
+  // use confirm to ask user if they want Special characters
+  // while the user says no to all of the above, repeat these series of confirm
+
+  return {
+      length: length,
+      isLowercaseIncluded: isLowercaseIncluded,
+      isUppercaseIncluded: isUppercaseIncluded,
+      isNumberIncluded: isNumberIncluded,
+      isSpecialCharsIncluded: isSpecialCharsIncluded,
+  };
+}
+
+// getPasswordOptions();
+
+// console.log(passwordArray);
 
 // Function for getting a random element from an array
+// function getRandom(arr) {
+//   var rand = myArray[Math.random() * myArray.length | 0]
+// };
+// getRandom();
+
+
+// Array.prototype.sample = function(){
+//   return this[Math.floor(Math.random()*this.length)];
+// };
+
 function getRandom(arr) {
-  const randChar = allChar[Math.floor(Math.random() * array.length)];
-  console.log(randChar);
+  return arr[Math.floor(Math.random()*arr.length)];
 }
 
-getRandom();
+// console.log(getRandom(lowerCasedCharacters));
+
+// console.log(numericCharacters.sample())
+
+// console.log(getRandom(getPasswordOptions));
+
+// length = passwordArray[0];
+
 // Function to generate password with user input
 function generatePassword() {
+  var passwordOptions = getPasswordOptions();
+  possibleCharacters = [];
+  
+  if (passwordOptions.isLowercaseIncluded === true) {
+    possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+  }
+  if (passwordOptions.isUppercaseIncluded === true) {
+    possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
+  }
+  if (passwordOptions.isNumberIncluded === true) {
+    possibleCharacters = possibleCharacters.concat(numericCharacters);
+  }
+  if (passwordOptions.isSpecialCharsIncluded === true) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+  };
+  var password = '';
+  for (var i = 0; i < passwordOptions.length; i++) {
+   var password = password + getRandom(possibleCharacters);
+  } return password;
+};
 
-}
+
+//  generatePassword();
+// console.log(possibleCharacters);
+// console.log(generatePassword())
+
+// let (i = 0; i < length; i++;) {
+//   var password += possibleCharacters.sample[i];
+// }
+
+// var password = possibleCharacters.sample(length);
+
+
 
 
 
