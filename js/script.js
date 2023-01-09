@@ -144,7 +144,7 @@ function generatePassword() {
     possibleCharacters = possibleCharacters.concat(specialCharacters);
   };
   
-  // assign password 
+  // Assign password 
   var password = '';
   for (var i = 0; i < passwordOptions.length; i++) {
    var password = password + getRandom(possibleCharacters);
