@@ -144,13 +144,36 @@ function generatePassword() {
     possibleCharacters = possibleCharacters.concat(specialCharacters);
   };
   
+  // assign password 
   var password = '';
   for (var i = 0; i < passwordOptions.length; i++) {
    var password = password + getRandom(possibleCharacters);
   }
 
-  return password;
-};
+   // Check that the password includes at least one of each character type that was selected
+   var hasLowercase = false;
+   var hasUppercase = false;
+   var hasNumber = false;
+   var hasSpecialChar = false;
+   for (var i = 0; i < password.length; i++) {
+     if (lowerCasedCharacters.includes(password[i])) {
+       hasLowercase = true;
+     } else if (upperCasedCharacters.includes(password[i])) {
+       hasUppercase = true;
+     } else if (numericCharacters.includes(password[i])) {
+       hasNumber = true;
+     } else if (specialCharacters.includes(password[i])) {
+       hasSpecialChar = true;
+     }
+   }
+   
+   // If the password doesn't include at least one of each character type, generate a new password
+   if ((passwordOptions.isLowercaseIncluded && !hasLowercase) || (passwordOptions.isUppercaseIncluded && !hasUppercase) || (passwordOptions.isNumberIncluded && !hasNumber) || (passwordOptions.isSpecialCharsIncluded && !hasSpecialChar)) {
+     return generatePassword();
+   }
+   
+   return password;
+ }
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
