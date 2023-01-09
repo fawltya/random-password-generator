@@ -116,10 +116,11 @@ function getPasswordOptions() {
 */
 
 function getPasswordOptions() {
-  length = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
-  while ( length < 10 || length > 64) {
+  var length = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
+  while (isNaN(length) || length < 10 || length > 64) {
     length = prompt("How many characters would you like the password to be? (Between 10 - 64 characters)");
   };
+  
   // Lowercase
   isLowercaseIncluded = confirm("Do you want lowercase characters in the password?");
   // Uppercase
@@ -128,8 +129,29 @@ function getPasswordOptions() {
   isNumberIncluded = confirm("Do you want numeric characters in the password?");
   // Special Char
   isSpecialCharsIncluded = confirm("Do you want special characters in the password?");
+ 
   // Prompt user about length of the password
   // while the user input is not a number or < 10 or > 64, we prompt them again about the length of the password
+  // var allIncluded = isLowercaseIncluded + isUppercaseIncluded + isNumberIncluded + isSpecialCharsIncluded;
+
+
+  // while (isLowercaseIncluded === 'false' && isUppercaseIncluded === 'false' && isNumberIncluded === 'false' && isSpecialCharsIncluded === 'false') {
+  //   isLowercaseIncluded = confirm("Do you want lowercase characters in the password?");
+  //   isUppercaseIncluded = confirm("Do you want uppercase characters in the password?");
+  //   isNumberIncluded = confirm("Do you want numeric characters in the password?");
+  //   isSpecialCharsIncluded = confirm("Do you want special characters in the password?");
+  // }
+
+  // if (isLowercaseIncluded === 'true' && isUppercaseIncluded === 'true' && isNumberIncluded === 'true' && isSpecialCharsIncluded === 'true') {
+    
+  //   }
+    
+    return {
+      length: length,
+      isLowercaseIncluded: isLowercaseIncluded,
+      isUppercaseIncluded: isUppercaseIncluded,
+      isNumberIncluded: isNumberIncluded,
+      isSpecialCharsIncluded: isSpecialCharsIncluded,
 
   // use confirm to ask user if they want Lowercase
   // use confirm to ask user if they want Uppercase
@@ -137,16 +159,15 @@ function getPasswordOptions() {
   // use confirm to ask user if they want Special characters
   // while the user says no to all of the above, repeat these series of confirm
 
-  return {
-      length: length,
-      isLowercaseIncluded: isLowercaseIncluded,
-      isUppercaseIncluded: isUppercaseIncluded,
-      isNumberIncluded: isNumberIncluded,
-      isSpecialCharsIncluded: isSpecialCharsIncluded,
-  };
+  
 }
 
+
+
 // getPasswordOptions();
+
+// while (getPasswordOptions.isLowercaseIncluded === 'true' && getPasswordOptions.isUppercaseIncluded === 'true' && getPasswordOptions.isNumberIncluded === 'true' && getPasswordOptions.isSpecialCharsIncluded === 'true') {
+
 
 // console.log(passwordArray);
 
@@ -180,7 +201,7 @@ function generatePassword() {
   
   if (passwordOptions.isLowercaseIncluded === true) {
     possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
-  }
+  } 
   if (passwordOptions.isUppercaseIncluded === true) {
     possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
   }
@@ -190,10 +211,23 @@ function generatePassword() {
   if (passwordOptions.isSpecialCharsIncluded === true) {
     possibleCharacters = possibleCharacters.concat(specialCharacters);
   };
+  if (passwordOptions.isLowercaseIncluded === 'false' && passwordOptions.isUppercaseIncluded === 'false' && passwordOptions.isNumberIncluded === 'false' && passwordOptions.isSpecialCharsIncluded === 'false') {
+    getPasswordOptions();
+  };
+
+
   var password = '';
   for (var i = 0; i < passwordOptions.length; i++) {
    var password = password + getRandom(possibleCharacters);
-  } return password;
+  }
+  
+  // if (isLowercaseIncluded === 'false') {
+  //   map
+  // }
+  
+  
+  
+  return password;
 };
 
 
